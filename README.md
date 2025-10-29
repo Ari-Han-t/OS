@@ -68,4 +68,59 @@ log_mutex: Thread-safe activity logging
 Key Algorithm:
 First reader locks out all writers
 
-Last reader unlocks, al
+Last reader unlocks, allowing writers
+
+Writer requires exclusive access (blocks all readers and writers)
+
+📊 System Architecture
+text
+Client (Browser)
+    ↓ HTTP Requests
+TCP Socket Server (Port 8080)
+    ↓ Thread per connection
+Request Handler
+    ↓
+Synchronization Layer (Semaphores/Mutexes)
+    ↓
+Shared Resource (5×8 Seat Array)
+📁 Project Structure
+text
+.
+├── server.c       # C backend with pthread and semaphores
+├── index.html     # Interactive web interface
+├── run.sh         # Build and launch script
+└── README.md      # Documentation
+🎯 Learning Outcomes
+This project demonstrates:
+
+Readers-Writers problem solution
+
+Thread synchronization with semaphores
+
+Mutex locks for critical sections
+
+Multi-threaded HTTP server in C
+
+Socket programming (TCP/IP)
+
+Race condition prevention
+
+Deadlock-free design
+
+⚠️ Known Limitations
+Reader Priority: Writers may experience starvation if readers continuously arrive
+
+No Persistence: Data resets on server restart (in-memory only)
+
+Local Only: Runs on localhost (not production-ready)
+
+🤝 Contributing
+Feel free to fork, submit issues, or create pull requests!
+
+📝 License
+MIT License - Free to use for educational purposes
+
+👨‍💻 Author
+Built as an educational project to demonstrate OS synchronization concepts.
+
+⭐ Star this repo if you found it helpful!
